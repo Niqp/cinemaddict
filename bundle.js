@@ -40258,6 +40258,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _const__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../const */ "./src/const.js");
 /* harmony import */ var _utils_abstract_observer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/abstract-observer */ "./src/utils/abstract-observer.js");
 /* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/utils */ "./src/utils/utils.js");
+/* harmony import */ var _film_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./film-model */ "./src/model/film-model.js");
+
 
 
 
@@ -40289,7 +40291,7 @@ class Comments extends _utils_abstract_observer__WEBPACK_IMPORTED_MODULE_1__["de
   addComment(updateType, film, comment) {
     return this._api.addComment(film,comment).then((update) => {
       this.comments = update.comments.map((currentComment) => Comments.adaptToClient(currentComment));
-      this._filmsModel.updateFilm(updateType,update.movie,true);
+      this._filmsModel.updateFilm(updateType,_film_model__WEBPACK_IMPORTED_MODULE_3__["default"].adaptToClient(update.movie),true);
     });
   }
 
@@ -40863,7 +40865,7 @@ class FilmList {
     if (this._currentPopup !== null) {
       if (this._currentPopup.component && this._currentPopup.component.currentId === data.id) {
         const savedY = this._currentPopup.currentY;
-        this._currentPopup.updatePopup(data);
+        this._currentPopup.updateAfterSaving(data);
         this._currentPopup.currentY = savedY;
       }
     }
@@ -41117,6 +41119,10 @@ class PopupPresenter {
       return;
     }
     Object(_utils_utils__WEBPACK_IMPORTED_MODULE_3__["shake"])(this._component.getElement(),this._handleModelEvent);
+  }
+
+  updateAfterSaving(data) {
+    this.updatePopup({...data, isSaving: false});
   }
 
   _updateWithCurrentComment() {
@@ -42282,7 +42288,7 @@ const getFilmPopupTemplate = (state,comments) => {
     `<div class="film-details__new-comment">
           <div class="film-details__add-emoji-label">${newCommentEmote ? `<img src="images/emoji/${newCommentEmote}.png" width="55" height="55" alt="emoji-smile">` : ''}</div>
             <label class="film-details__comment-label">
-              <textarea class="film-details__comment-input" placeholder="${isSaving ? 'Saving...' : 'Select reaction below and write comment here'}" name="comment" ${isSaving ? 'disabled' : ''}>${newCommentMessage ? he__WEBPACK_IMPORTED_MODULE_3___default.a.encode(newCommentMessage) : ''}</textarea>
+              <textarea class="film-details__comment-input" placeholder="${isSaving ? 'Uploading...' : 'Select reaction below and write comment here'}" name="comment" ${isSaving ? 'disabled' : ''}>${newCommentMessage ? he__WEBPACK_IMPORTED_MODULE_3___default.a.encode(newCommentMessage) : ''}</textarea>
             </label>
             <div class="film-details__emoji-list">
             ${generatedEmotes.join('')}
