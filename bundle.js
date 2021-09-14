@@ -42567,7 +42567,7 @@ const getCardTemplate = (film) => {
       <span class="film-card__duration">${Object(_utils_utils__WEBPACK_IMPORTED_MODULE_1__["formatDate"])(Object(_utils_utils__WEBPACK_IMPORTED_MODULE_1__["createDurationMinutes"])(duration),_const__WEBPACK_IMPORTED_MODULE_0__["DateFormats"].HOURS_AND_MINUTES)}</span>
       <span class="film-card__genre">${genres[0]}</span>
     </p>
-    <img src="/${poster}" alt="" class="film-card__poster">
+    <img src="${poster}" alt="" class="film-card__poster">
     <p class="film-card__description">${shortDescription}</p>
     <a class="film-card__comments">${comments.length} comments</a>
     <div class="film-card__controls">
