@@ -8,4 +8,4 @@
 
 ## Commit tree at https://github.com/Niqp/1713127-cinemaddict-15
 
-### https://niqp.github.io/cinemaddict/
+### Deployed at https://niqp.github.io/cinemaddict/
